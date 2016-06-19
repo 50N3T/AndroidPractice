@@ -2,11 +2,15 @@ package com.example.a50n3t.customadapterdemov_3;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
+    TextView textView;
 
     String[] countryNames = {
                               "China",
@@ -33,10 +37,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listView = (ListView) findViewById(R.id.listView);
+        textView = (TextView) findViewById(R.id.showText);
+
 
         CustomAdapter adapter = new CustomAdapter(MainActivity.this,countryNames,imagesId);
+        listView.setAdapter(adapter);
 
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                textView.setText(countryNames[position]);
+            }
+        });
 
     }
 }
